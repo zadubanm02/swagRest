@@ -1,0 +1,25 @@
+{
+  "swagger": {
+    "info": {
+      "description": "A Posts API",
+      "version": "1.0.0",
+      "title": "Post endpoint"
+    },
+    "tags": [
+      {
+        "name": "post",
+        "description": "Operations about post"
+      }
+    ],
+    "schemes": ["http"],
+    "specVersion": 3,
+    "outputDirectory": ".",
+    "entryFile": "./src/server.ts",
+    "host": "localhost:3000",
+    "basePath": "/"
+  },
+  "routes": {
+    "entryFile": "./src/app.ts",
+    "routesDir": "./src/prispevok"
+  }
+}

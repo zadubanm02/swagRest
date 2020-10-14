@@ -1,0 +1,299 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"PostResponse": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"added": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"comments": {
+						"properties": {
+							"_id": {
+								"type": "string"
+							},
+							"username": {
+								"type": "string"
+							},
+							"commentdata": {
+								"type": "string"
+							},
+							"rating": {
+								"type": "number",
+								"format": "double"
+							}
+						},
+						"required": [
+							"rating",
+							"commentdata",
+							"username",
+							"_id"
+						],
+						"type": "object",
+						"nullable": true
+					}
+				},
+				"required": [
+					"_id",
+					"name",
+					"description",
+					"added"
+				],
+				"type": "object",
+				"additionalProperties": true
+			},
+			"IPost": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"added": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"comments": {
+						"properties": {
+							"username": {
+								"type": "string"
+							},
+							"commentdata": {
+								"type": "string"
+							},
+							"rating": {
+								"type": "number",
+								"format": "double"
+							}
+						},
+						"required": [
+							"rating",
+							"commentdata",
+							"username"
+						],
+						"type": "object",
+						"nullable": true
+					}
+				},
+				"required": [
+					"name",
+					"description",
+					"added"
+				],
+				"type": "object",
+				"additionalProperties": true
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "myrestapi",
+		"version": "1.0.0",
+		"license": {
+			"name": "ISC"
+		}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/posts": {
+			"get": {
+				"operationId": "GetAllPosts",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/PostResponse"
+									},
+									"type": "array"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"tags": [
+					"Post"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "limit",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "offset",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"post": {
+				"operationId": "CreatePost",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PostResponse"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"tags": [
+					"Post"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IPost"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/posts/{id}": {
+			"get": {
+				"operationId": "GetOnePost",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PostResponse"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"tags": [
+					"Post"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"put": {
+				"operationId": "UpdatePost",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PostResponse"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"tags": [
+					"Post"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IPost"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeletePost",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PostResponse"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"tags": [
+					"Post"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IPost"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "http://localhost:3000/"
+		}
+	]
+}
